@@ -68,6 +68,9 @@ web_modules/
 # dotenv environment variable files
 .env
 
+#beer.json
+src/config/beer.json
+
 # parcel-bundler cache (https://parceljs.org/)
 .cache
 .parcel-cache
