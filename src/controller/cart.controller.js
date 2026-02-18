@@ -1,34 +1,71 @@
-// src/controller/cart.controller.js
+const cartService = require("../service/cart.service");
 
-const getMyCart = (req, res) => {
-    res.json({ message: "getMyCart OK", user: req.user || null });
+function getUserId(req) {
+    // adapte si ton jwt met un autre champ
+    return req.user?.userId || req.user?.id || req.user?._id;
+}
+
+const getMyCart = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const cart = await cartService.getMyCart(userId);
+        res.json(cart);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const addToCart = (req, res) => {
-    res.json({ message: "addToCart OK", body: req.body });
+const addToCart = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const { beerId, quantity } = req.body;
+        const cart = await cartService.addToCart(userId, beerId, quantity ?? 1);
+        res.json(cart);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const updateItem = (req, res) => {
-    res.json({ message: "updateItem OK", body: req.body });
+const updateItem = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const { beerId, quantity } = req.body;
+        const cart = await cartService.updateItem(userId, beerId, quantity);
+        res.json(cart);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const removeItem = (req, res) => {
-    res.json({ message: "removeItem OK", beerId: req.params.beerId });
+const removeItem = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const { beerId } = req.params;
+        const cart = await cartService.removeItem(userId, beerId);
+        res.json(cart);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const clearCart = (req, res) => {
-    res.json({ message: "clearCart OK" });
+const clearCart = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const cart = await cartService.clearCart(userId);
+        res.json(cart);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const checkout = (req, res) => {
-    res.json({ message: "checkout OK" });
+const checkout = async (req, res) => {
+    try {
+        const userId = getUserId(req);
+        const result = await cartService.checkout(userId);
+        res.json(result);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-module.exports = {
-    getMyCart,
-    addToCart,
-    updateItem,
-    removeItem,
-    clearCart,
-    checkout
-};
+module.exports = { getMyCart, addToCart, updateItem, removeItem, clearCart, checkout };
