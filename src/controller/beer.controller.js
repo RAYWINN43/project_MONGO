@@ -1,29 +1,29 @@
-const { asyncHandler } = require("../utils/asyncHandler");
-const beerService = require("../service/beer.service");
+// src/controller/beer.controller.js
 
-const createBeer = asyncHandler(async (req, res) => {
-    const beer = await beerService.createBeer(req.body);
-    res.status(201).json(beer);
-});
+const listBeers = (req, res) => {
+    res.json({ message: "listBeers OK" });
+};
 
-const listBeers = asyncHandler(async (req, res) => {
-    const beers = await beerService.listBeers();
-    res.json(beers);
-});
+const getBeer = (req, res) => {
+    res.json({ message: "getBeer OK", id: req.params.id });
+};
 
-const getBeer = asyncHandler(async (req, res) => {
-    const beer = await beerService.getBeer(req.params.id);
-    res.json(beer);
-});
+const createBeer = (req, res) => {
+    res.status(201).json({ message: "createBeer OK", body: req.body });
+};
 
-const updateBeer = asyncHandler(async (req, res) => {
-    const beer = await beerService.updateBeer(req.params.id, req.body);
-    res.json(beer);
-});
+const updateBeer = (req, res) => {
+    res.json({ message: "updateBeer OK", id: req.params.id, body: req.body });
+};
 
-const deleteBeer = asyncHandler(async (req, res) => {
-    const beer = await beerService.deleteBeer(req.params.id);
-    res.json({ message: "Supprimé", beer });
-});
+const deleteBeer = (req, res) => {
+    res.json({ message: "deleteBeer OK", id: req.params.id });
+};
 
-module.exports = { createBeer, listBeers, getBeer, updateBeer, deleteBeer };
+module.exports = {
+    listBeers,
+    getBeer,
+    createBeer,
+    updateBeer,
+    deleteBeer
+};

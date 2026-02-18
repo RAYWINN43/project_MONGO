@@ -1,37 +1,34 @@
-const { asyncHandler } = require("../utils/asyncHandler");
-const cartService = require("../service/cart.service");
+// src/controller/cart.controller.js
 
-const getMyCart = asyncHandler(async (req, res) => {
-    const cart = await cartService.getMyCart(req.user.userId);
-    res.json(cart);
-});
+const getMyCart = (req, res) => {
+    res.json({ message: "getMyCart OK", user: req.user || null });
+};
 
-const addToCart = asyncHandler(async (req, res) => {
-    const { beerId, quantity } = req.body;
-    const cart = await cartService.addToCart(req.user.userId, beerId, quantity ?? 1);
-    res.json(cart);
-});
+const addToCart = (req, res) => {
+    res.json({ message: "addToCart OK", body: req.body });
+};
 
-const updateItem = asyncHandler(async (req, res) => {
-    const { beerId, quantity } = req.body;
-    const cart = await cartService.updateItem(req.user.userId, beerId, quantity);
-    res.json(cart);
-});
+const updateItem = (req, res) => {
+    res.json({ message: "updateItem OK", body: req.body });
+};
 
-const removeItem = asyncHandler(async (req, res) => {
-    const { beerId } = req.params;
-    const cart = await cartService.removeItem(req.user.userId, beerId);
-    res.json(cart);
-});
+const removeItem = (req, res) => {
+    res.json({ message: "removeItem OK", beerId: req.params.beerId });
+};
 
-const clearCart = asyncHandler(async (req, res) => {
-    const cart = await cartService.clearCart(req.user.userId);
-    res.json(cart);
-});
+const clearCart = (req, res) => {
+    res.json({ message: "clearCart OK" });
+};
 
-const checkout = asyncHandler(async (req, res) => {
-    const result = await cartService.checkout(req.user.userId);
-    res.json(result);
-});
+const checkout = (req, res) => {
+    res.json({ message: "checkout OK" });
+};
 
-module.exports = { getMyCart, addToCart, updateItem, removeItem, clearCart, checkout };
+module.exports = {
+    getMyCart,
+    addToCart,
+    updateItem,
+    removeItem,
+    clearCart,
+    checkout
+};
