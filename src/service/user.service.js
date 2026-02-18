@@ -8,27 +8,15 @@ class UserService {
     }
 
     static async getUserById(id) {
-        const user = await UserRepository.findById(id) ;
-        if (!user) {
-            throw new Error('User not found') ;
-        }
-        return user ;
+        return await UserRepository.findById(id) ;
     }
 
     static async getUserByName(name) {
-        const user = await UserRepository.findByName(name) ;
-        if (!user) {
-            throw new Error('User not found') ;
-        }
-        return user ;
+        return await UserRepository.findByName(name) ;
     }
 
     static async getUserByEmail(email) {
-        const user = await UserRepository.findByEmail(email) ;
-        if (!user) {
-            throw new Error('User not found') ;
-        }
-        return user ;
+        return await UserRepository.findByEmail(email) ;
     }
 
     static async createUser(userData) {
@@ -36,19 +24,11 @@ class UserService {
     }
 
     static async updateUser(id, userData) {
-        const updatedUser = await UserRepository.update(id, userData) ;
-        if (!updatedUser) {
-            throw new Error('User not found') ;
-        }
-        return updatedUser ;
+        return await UserRepository.update(id, userData) ;
     }
 
     static async deleteUser(id) {
-        const deletedUser = await UserRepository.delete(id) ;
-        if (!deletedUser) {
-            throw new Error('User not found') ;
-        }
-        return deletedUser ;
+        return await UserRepository.delete(id) ;
     }
 
 }

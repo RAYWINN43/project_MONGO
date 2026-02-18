@@ -1,75 +1,98 @@
 // Imports 
 import UserService from '../service/user.service.js';
+import ApiResponse from '../utils/apiResponse.js';
 
 class UserController {
 
     static async getAllUsers(req, res, next) {
         try {
             const users = await UserService.getAllUsers() ;
-            res.json(users) ;
+            return ApiResponse.success(res, 'Users retrieved successfully', users) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error retrieving users:', error) ;
+            return ApiResponse.error(res, 'Failed to retrieve users', 500, error.message) ;
         }
     }
 
     static async getUserById(req, res, next) {
         try {
             const user = await UserService.getUserById(req.params.id) ;
-            res.json(user) ;
+            if (!user) {
+                return ApiResponse.notFound(res, 'User not found') ;
+            }
+            return ApiResponse.success(res, 'User retrieved successfully', user) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error retrieving user:', error) ;
+            return ApiResponse.error(res, 'Failed to retrieve user', 500, error.message) ;
         }
     }
 
     static async getUserByName(req, res, next) {
         try {
             const user = await UserService.getUserByName(req.params.name) ;
-            res.json(user) ;
+            if (!user) {
+                return ApiResponse.notFound(res, 'User not found') ;
+            }
+            return ApiResponse.success(res, 'User retrieved successfully', user) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error retrieving user by name:', error) ;
+            return ApiResponse.error(res, 'Failed to retrieve user', 500, error.message) ;
         }
     }
 
     static async getUserByEmail(req, res, next) {
         try {
             const user = await UserService.getUserByEmail(req.params.email) ;
-            res.json(user) ;
+            if (!user) {
+                return ApiResponse.notFound(res, 'User not found') ;
+            }
+            return ApiResponse.success(res, 'User retrieved successfully', user) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error retrieving user by email:', error) ;
+            return ApiResponse.error(res, 'Failed to retrieve user', 500, error.message) ;
         }
     }
 
     static async createUser(req, res, next) {
         try {
             const newUser = await UserService.createUser(req.body) ;
-            res.status(201).json(newUser) ;
+            return ApiResponse.created(res, 'User created successfully', newUser) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error creating user:', error) ;
+            return ApiResponse.badRequest(res, 'Failed to create user', error.message) ;
         }
     }
 
     static async updateUser(req, res, next) {
         try {
             const updatedUser = await UserService.updateUser(req.params.id, req.body) ;
-            res.json(updatedUser) ;
+            if (!updatedUser) {
+                return ApiResponse.notFound(res, 'User not found') ;
+            }
+            return ApiResponse.success(res, 'User updated successfully', updatedUser) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error updating user:', error) ;
+            return ApiResponse.badRequest(res, 'Failed to update user', error.message) ;
         }
     }
 
     static async deleteUser(req, res, next) {
         try {
-            await UserService.deleteUser(req.params.id) ;
-            res.status(204).send() ;
+            const result = await UserService.deleteUser(req.params.id) ;
+            if (!result) {
+                return ApiResponse.notFound(res, 'User not found') ;
+            }
+            return ApiResponse.success(res, 'User deleted successfully', null, 204) ;
         }
         catch (error) {
-            next(error) ;
+            console.error('Error deleting user:', error) ;
+            return ApiResponse.error(res, 'Failed to delete user', 500, error.message) ;
         }
     }
 }
