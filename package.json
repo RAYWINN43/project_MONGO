@@ -15,7 +15,7 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "no test specified"
+    "test": "echo \"Error: no test specified\""
   },
   "dependencies": {
     "cors": "^2.8.6",
