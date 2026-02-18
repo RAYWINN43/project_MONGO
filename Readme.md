@@ -1,3 +1,4 @@
+[![Node CI](https://github.com/RAYWINN43/project_MONGO/actions/workflows/node-ci.yml/badge.svg)](https://github.com/RAYWINN43/project_MONGO/actions/workflows/node-ci.yml)
 
 
 # Site bande-annonce film
