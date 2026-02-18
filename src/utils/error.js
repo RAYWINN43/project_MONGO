@@ -6,7 +6,7 @@ class AppError extends Error {
 }
 
 function notFound(req, res) {
-    res.status(404).json({ error: "Not Found" });
+    res.status(404).json({ error: "Not Founds" });
 }
 
 function errorHandler(err, req, res, next) {

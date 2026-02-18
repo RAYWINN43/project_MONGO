@@ -1,29 +1,49 @@
 // src/controller/beer.controller.js
+const beerService = require("../service/beer.service");
 
-const listBeers = (req, res) => {
-    res.json({ message: "listBeers OK" });
+const listBeers = async (req, res) => {
+    try {
+        const beers = await beerService.listBeers();
+        return res.json(beers);
+    } catch (err) {
+        return res.status(500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const getBeer = (req, res) => {
-    res.json({ message: "getBeer OK", id: req.params.id });
+const getBeer = async (req, res) => {
+    try {
+        const beer = await beerService.getBeer(req.params.id);
+        return res.json(beer);
+    } catch (err) {
+        return res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const createBeer = (req, res) => {
-    res.status(201).json({ message: "createBeer OK", body: req.body });
+const createBeer = async (req, res) => {
+    try {
+        const created = await beerService.createBeer(req.body);
+        return res.status(201).json(created);
+    } catch (err) {
+        return res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const updateBeer = (req, res) => {
-    res.json({ message: "updateBeer OK", id: req.params.id, body: req.body });
+const updateBeer = async (req, res) => {
+    try {
+        const updated = await beerService.updateBeer(req.params.id, req.body);
+        return res.json(updated);
+    } catch (err) {
+        return res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-const deleteBeer = (req, res) => {
-    res.json({ message: "deleteBeer OK", id: req.params.id });
+const deleteBeer = async (req, res) => {
+    try {
+        const deleted = await beerService.deleteBeer(req.params.id);
+        return res.json({ message: "Deleted ✅", beer: deleted });
+    } catch (err) {
+        return res.status(err.statusCode || 500).json({ error: err.message || "Erreur serveur" });
+    }
 };
 
-module.exports = {
-    listBeers,
-    getBeer,
-    createBeer,
-    updateBeer,
-    deleteBeer
-};
+module.exports = { listBeers, getBeer, createBeer, updateBeer, deleteBeer };
