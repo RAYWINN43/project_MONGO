@@ -41,8 +41,9 @@ Pour lancer le projet localement :
     cd PROJET
     ```
 
-2.  Lancer la stack :
+2.  Lancer lr projet :
     ```bash
+    mettre la BDD beer.js dans src/config/beer.js
     npm i
     npm start
     ```
