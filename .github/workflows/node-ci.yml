@@ -2,9 +2,9 @@ name: Node CI
 
 on:
   push:
-    branches: ["main", "staging"]
+    branches: ["main", "staging", "staging_1"]
   pull_request:
-    branches: ["main", "staging"]
+    branches: ["main", "staging", "staging_1"]
 
 jobs:
   build:
@@ -19,12 +19,20 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: |
+            back/package-lock.json
+            front-react/package-lock.json
 
-      - name: Install dependencies
+      - name: Install back dependencies
+        working-directory: back
         run: npm ci
 
-      - name: Run lint (if exists)
+      - name: Install front dependencies
+        working-directory: front-react
+        run: npm ci
+
+      - name: Lint back (if exists)
+        working-directory: back
         run: |
           if npm run | grep -qE '^  lint'; then
             npm run lint
@@ -32,7 +40,17 @@ jobs:
             echo "No lint script, skipping"
           fi
 
-      - name: Run tests (if exists)
+      - name: Lint front (if exists)
+        working-directory: front-react
+        run: |
+          if npm run | grep -qE '^  lint'; then
+            npm run lint
+          else
+            echo "No lint script, skipping"
+          fi
+
+      - name: Test back (if exists)
+        working-directory: back
         run: |
           if npm run | grep -qE '^  test'; then
             npm test
@@ -40,5 +58,23 @@ jobs:
             echo "No tests, skipping"
           fi
 
+      - name: Test front (if exists)
+        working-directory: front-react
+        run: |
+          if npm run | grep -qE '^  test'; then
+            npm test
+          else
+            echo "No tests, skipping"
+          fi
+
+      - name: Build front (if exists)
+        working-directory: front-react
+        run: |
+          if npm run | grep -qE '^  build'; then
+            npm run build
+          else
+            echo "No build script, skipping"
+          fi
+
       - name: CI checkpoint
-        run: echo "CI passed — project_MONGO OK"
+        run: echo "CI passed — back + front OK"
