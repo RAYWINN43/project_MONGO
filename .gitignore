@@ -66,7 +66,7 @@ web_modules/
 .yarn-integrity
 
 # dotenv environment variable files
-.env
+back/.env
 
 #beer.json
 src/config/beer.json
@@ -138,5 +138,5 @@ dist
 # Vite logs files
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
-.env
-.env
+back/.env
+back/.env
