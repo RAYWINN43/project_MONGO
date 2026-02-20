@@ -42,7 +42,7 @@ Pour lancer le projet localement :
     cd PROJET
     ```
 
-2.  Lancer lr projet :
+2.  Lancer le projet :
     ```bash
     mettre la BDD beer.js dans src/config/beer.js
     npm i
@@ -57,4 +57,5 @@ Antoine partie : GIT(creation repo invit, init ...) + README
 Corentin partie : user
 
 ## 4. SCREENSHOT
-<!-- Home : ![](images/Screen_home.html.png) -->
+Maquette Home : ![](front-react/public/Maquette-ACCUEIL.png)
+Maquette Shop : ![](front-react/public/Maquette-SHOP.png)
