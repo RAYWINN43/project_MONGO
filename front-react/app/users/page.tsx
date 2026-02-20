@@ -41,8 +41,8 @@ const PageUsers = () => {
                     {users && users.map((user) => (
                             <tbody key={user._id} className={user_styles.tableText}>
                                 <tr>
-                                    <th scope="col">{user.name}</th>
-                                    <th scope="col">{user.email}</th>
+                                    <th scope="col"><a href={`/users/${user._id}`}>{user.name}</a></th>
+                                    <th scope="col"><a href={`/users/${user._id}`}>{user.email}</a></th>
                                     <th scope="col">{user.createdAt}</th>
                                 </tr>
                             </tbody>
