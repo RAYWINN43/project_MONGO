@@ -1,65 +1,106 @@
+"use client";
+
+import { useState } from "react";
+import styles from "./page.module.css";
 import Image from "next/image";
 
-export default function Home() {
+export default function HomePage() {
+  const slides = [
+    {
+      src: "/biere4.png",
+      alt: "Bouteille",
+      title: "NOS BIÈRES",
+      text: "Nos bières répondent à des critères rigoureux pour vous offrir un choix varié : des incontournables aux pépites méconnues.",
+    },
+    {
+      src: "/biere2.png",
+      alt: "Bouteille",
+      title: "NOS BRASSERIES",
+      text: "Nous travaillons avec des brasseurs passionnés et des partenaires de confiance afin de garantir qualité, traçabilité et diversité.",
+    },
+    {
+      src: "/biere3.png",
+      alt: "Bouteille",
+      title: "NOTRE SÉLECTION",
+      text: "Des blondes légères aux IPA intenses, en passant par des bières artisanales rares : une sélection pensée pour tous les goûts.",
+    },
+  ];
+
+  const [activeSlide, setActiveSlide] = useState(0);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex min-h-screen w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+    <main className={styles.page}>
+      <div className={styles.wrapper}>
+        <section className={styles.heroCard}>
+          <div className={styles.bottle} aria-hidden>
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
+              src={slides[activeSlide].src}
+              alt={slides[activeSlide].alt}
+              width={50}
+              height={80}
+              style={{ objectFit: "contain" }}
+              priority
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          </div>
+
+          <div>
+            <h1>{slides[activeSlide].title}</h1>
+            <p className={styles.heroText}>{slides[activeSlide].text}</p>
+          </div>
+        </section>
+
+        <div className={styles.dots}>
+          {slides.map((_, i) => (
+            <button
+              key={i}
+              type="button"
+              onClick={() => setActiveSlide(i)}
+              aria-label={`Slide ${i + 1}`}
+              style={{
+                width: 10,
+                height: 10,
+                borderRadius: 999,
+                border: "none",
+                background: "#d6a85d",
+                opacity: activeSlide === i ? 1 : 0.5,
+                cursor: "pointer",
+                padding: 0,
+              }}
+            />
+          ))}
         </div>
-      </main>
-    </div>
+
+        <div className={styles.divider} />
+
+        <h2 className={styles.h2}>Qui sommes-nous ?</h2>
+
+        <section className={styles.aboutCard}>
+          <div className={styles.aboutIcon} aria-hidden>
+            👥
+          </div>
+
+          <div>
+            <p className={styles.aboutText}>
+              Nous sommes une entreprise fondée en 1985. Depuis nos débuts, nous mettons un point d’honneur à sélectionner les meilleures bières pour nos clients. Notre métier est avant tout une passion que nous exerçons avec cœur et exigence.
+            </p>
+          </div>
+        </section>
+
+        <h2 className={styles.h2}>Où est notre usine ?</h2>
+
+        <section className={styles.map}>
+          <iframe
+            src="https://www.openstreetmap.org/export/embed.html?bbox=4.851%2C45.756%2C4.861%2C45.760&layer=mapnik&marker=45.758229%2C4.856318"
+            style={{
+              border: 0,
+              width: "100%",
+              height: "100%",
+            }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+          />
+        </section>
+      </div>
+    </main>
   );
 }
