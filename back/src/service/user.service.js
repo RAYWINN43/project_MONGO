@@ -1,37 +1,43 @@
 // Imports
-import UserRepository from "../repository/user.repository.js";
+const UserRepository = require("../repository/user.repository") ;
 
-class UserService {
+
     
-    static async getAllUsers() {
-        return await UserRepository.findall() ;
-    }
+function getAllUsers() {
+    return UserRepository.findAllUsers() ;
+}
 
-    static async getUserById(id) {
-        return await UserRepository.findById(id) ;
-    }
+function getUserById(id) {
+    return UserRepository.findUserById(id) ;
+}
 
-    static async getUserByName(name) {
-        return await UserRepository.findByName(name) ;
-    }
+function getUserByName(name) {
+    return UserRepository.findUserByName(name) ;
+}
 
-    static async getUserByEmail(email) {
-        return await UserRepository.findByEmail(email) ;
-    }
+function getUserByEmail(email) {
+    return UserRepository.findUserByEmail(email) ;
+}
 
-    static async createUser(userData) {
-        return await UserRepository.create(userData) ;
-    }
+function createUser(userData) {
+    return UserRepository.createUser(userData) ;
+}
 
-    static async updateUser(id, userData) {
-        return await UserRepository.update(id, userData) ;
-    }
+function updateUser(id, userData) {
+    return UserRepository.updateUser(id, userData) ;
+}
 
-    static async deleteUser(id) {
-        return await UserRepository.delete(id) ;
-    }
-
+function deleteUser(id) {
+    return UserRepository.deleteUser(id) ;
 }
 
 // Export
-export default UserService ;
+module.exports = {
+    getAllUsers,
+    getUserById,
+    getUserByName,
+    getUserByEmail,
+    createUser,
+    updateUser,
+    deleteUser
+} ;

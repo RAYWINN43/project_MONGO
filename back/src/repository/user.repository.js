@@ -1,39 +1,46 @@
 // Imports
-import UserModel from '../model/user.js';
+const userModel = require("../model/user");
 
-class UserRepository {
 
-    static async findall() {
-            return await UserModel.find() ;
-    }
-
-    static async findById(id) {
-        return await UserModel.findById(id) ;
-    }
-
-    static async findByName(name) {
-        return await UserModel.findOne({ name }) ;
-    }
-
-    static async findByEmail(email) {
-        return await UserModel.findOne({ email }) ;
-    }
-
-    static async create(userData) {
-        const user = new UserModel(userData) ;
-        return await user.save() ;
-    }
-
-    static async update(id, userData) {
-        return await UserModel.findByIdAndUpdate(id, userData, {
-            new: true,
-            runValidators: true,}) ;
-    }
-
-    static async delete(id) {
-        return await UserModel.findByIdAndDelete(id) ;
-    }
+function findAllUsers() {
+        return userModel.find() ;
 }
 
+function findUserById(id) {
+    return userModel.findById(id) ;
+}
+
+function findUserByName(name) {
+    return userModel.findOne({ name }) ;
+}
+
+function findUserByEmail(email) {
+    return userModel.findOne({ email }) ;
+}
+
+function createUser(userData) {
+    const user = new userModel(userData) ;
+    return user.save() ;
+}
+
+function updateUser(id, userData) {
+    return userModel.findByIdAndUpdate(id, userData, {
+        new: true,
+        runValidators: true,}) ;
+}
+
+function deleteUser(id) {
+    return userModel.findByIdAndDelete(id) ;
+}
+
+
 // Export
-export default UserRepository ;
+module.exports = {
+    findAllUsers,
+    findUserById,
+    findUserByName,
+    findUserByEmail,
+    createUser,
+    updateUser,
+    deleteUser
+} ;
