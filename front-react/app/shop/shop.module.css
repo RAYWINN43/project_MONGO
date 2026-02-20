@@ -1,0 +1,180 @@
+/* shop.module.css */
+
+.page {
+    min-height: 100vh;
+    background: #fbf3e7;
+}
+
+/* ====== HEADER ====== */
+.header {
+    height: 92px;
+    background: #f4c86b;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 28px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.brandIcon {
+    font-size: 34px; /* placeholder (emoji) */
+    line-height: 1;
+}
+
+.title {
+    font-size: 30px;
+    font-weight: 800;
+    margin: 0;
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+}
+
+.actionItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.actionIcon {
+    font-size: 28px; /* placeholder (emoji) */
+    line-height: 1;
+}
+
+.profileIcon {
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    display: grid;
+    place-items: center;
+    font-size: 20px;
+}
+
+/* ====== CONTENT + DECOR (bulles) ====== */
+.content {
+    position: relative;
+    padding: 64px 28px 90px;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* bulles côté droit + bulles centre */
+.content::before,
+.content::after {
+    content: "";
+    position: absolute;
+    pointer-events: none;
+}
+
+/* bulles droite (grande + petites) */
+.content::before {
+    top: 26px;
+    right: -140px;
+    width: 420px;
+    height: 520px;
+    background:
+            radial-gradient(circle at 70% 35%, #f4c86b 0 88px, transparent 90px),
+            radial-gradient(circle at 85% 55%, rgba(0,0,0,0.18) 0 88px, transparent 90px),
+            radial-gradient(circle at 78% 57%, #f4c86b 0 160px, transparent 162px),
+            radial-gradient(circle at 30% 18%, #f4c86b 0 34px, transparent 36px),
+            radial-gradient(circle at 30% 18%, rgba(0,0,0,0.18) 0 34px, transparent 36px),
+            radial-gradient(circle at 18% 78%, #f4c86b 0 14px, transparent 16px),
+            radial-gradient(circle at 18% 78%, rgba(0,0,0,0.18) 0 14px, transparent 16px);
+    opacity: 0.95;
+}
+
+/* bulles centre bas */
+.content::after {
+    left: 50%;
+    top: 420px;
+    transform: translateX(-50%);
+    width: 520px;
+    height: 420px;
+    background:
+            radial-gradient(circle at 44% 58%, #f4c86b 0 95px, transparent 97px),
+            radial-gradient(circle at 46% 60%, rgba(0,0,0,0.18) 0 95px, transparent 97px),
+            radial-gradient(circle at 64% 40%, #f4c86b 0 26px, transparent 28px),
+            radial-gradient(circle at 66% 42%, rgba(0,0,0,0.18) 0 26px, transparent 28px),
+            radial-gradient(circle at 58% 76%, #f4c86b 0 12px, transparent 14px),
+            radial-gradient(circle at 58% 76%, rgba(0,0,0,0.18) 0 12px, transparent 14px);
+    opacity: 0.9;
+}
+
+/* ====== GRID + CARD ====== */
+.grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 90px 170px; /* gros espacements comme la maquette */
+    justify-items: center;
+    align-items: start;
+    padding-top: 30px;
+}
+
+.card {
+    width: 360px;
+    min-height: 330px;
+    background: #f4c86b;
+    box-shadow:
+            0 10px 0 rgba(0,0,0,0.12),
+            0 14px 24px rgba(0,0,0,0.18);
+    padding: 26px 22px 22px;
+    position: relative;
+}
+
+.cardIcon {
+    width: 48px;
+    height: 48px;
+    display: grid;
+    place-items: center;
+    font-size: 40px; /* placeholder icon */
+    margin-bottom: 18px;
+}
+
+.cardTitle {
+    font-size: 22px;
+    font-weight: 900;
+    margin: 0 0 10px;
+}
+
+.cardText {
+    font-size: 13px;
+    line-height: 1.35;
+    margin: 0;
+    font-weight: 600;
+}
+
+.cardMeta {
+    margin-top: 12px;
+    font-size: 12px;
+    line-height: 1.35;
+    font-weight: 700;
+    opacity: 0.9;
+}
+
+/* responsive */
+@media (max-width: 1050px) {
+    .grid {
+        gap: 40px;
+        grid-template-columns: 1fr;
+    }
+    .content::before {
+        right: -220px;
+        opacity: 0.6;
+    }
+    .content::after {
+        top: 520px;
+        opacity: 0.55;
+    }
+}

@@ -1,0 +1,22 @@
+.table {
+    width: 90em;
+    border-collapse: collapse;
+    margin-top: 20px;
+    margin-left: -5em ;
+}
+
+.tableText {
+    background-color: #f6f2ef;
+    font-size: 14px;
+    color: #333;
+    padding: 8px;
+    border: 1px solid #ec9;
+    text-align: left;
+}
+
+.tableHeader {
+    background-color: #fac772;
+    color:#333;
+    font-weight: bold;
+    text-align: left;
+}
