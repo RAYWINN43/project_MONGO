@@ -1,0 +1,103 @@
+.page {
+  min-height: calc(100vh - 52px - 58px);
+  background: #f8f0e0;
+  padding: 16px 14px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.heroText {
+  color: #000000;
+}
+
+.heroCard h1 {
+  color: #000000;
+  font-weight: 900;
+  margin: 0;
+}
+
+.wrapper {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+}
+
+.heroCard {
+  background: #fac772;
+  border-radius: 8px;
+  padding: 16px;
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 14px;
+  box-shadow: 0 2px 0 rgba(0, 0, 0, 0.15);
+}
+
+.bottle {
+  width: 60px;
+  height: 85px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.35);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 26px;
+}
+
+.divider {
+  height: 3px;
+  background: #f1b55d;
+  border-radius: 999px;
+  width: 100%;
+}
+
+.h2 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 900;
+  color: #181818;
+}
+
+.aboutCard {
+  background: #fac772;
+  border-radius: 999px;
+  padding: 14px 18px;
+  display: grid;
+  grid-template-columns: 60px 1fr;
+  gap: 12px;
+  align-items: center;
+}
+
+.aboutIcon {
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  background: #f8e0e4;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+}
+
+.aboutTitle {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 900;
+  color: #181818;
+}
+
+.aboutText {
+  margin-top: 6px;
+  font-size: 11px;
+  line-height: 1.4;
+  color: #181818;
+}
+
+.dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+}
