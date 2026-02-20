@@ -51,7 +51,7 @@ Pour lancer le projet localement :
     se rendre http://localhost:8081/ pour consulter Express
      ```
 
-2.  Lancer un jeux BDD et le BACK:
+3.  Lancer un jeux BDD et le BACK:
     ```bash
     cd back
     npm i
@@ -59,7 +59,7 @@ Pour lancer le projet localement :
     node scripts/import.js beer.json
     npm start
     ```
-3.  Lancer un jeux BDD et le BACK:
+4.  Lancer le FRONT:
     ```bash
     cd front-react
     npm run dev
@@ -68,12 +68,12 @@ Pour lancer le projet localement :
 ## 3. Méthodologie
 
 ### Organisation
-Evan partie : beer (back) + panier (back) + debug
-Antoine partie : GIT(creation repo invit, init ...) + README + ci + debug
+Evan partie : beer (back) + panier (back) + debug + SHOP (front)
+Antoine partie : GIT(creation repo invit, init ...) + README + ci + debug + home PAGE, CGV (front)
 Corentin partie : user (back+front) + debug
 
 ## 4. SCREENSHOT
 Maquette Home : ![](front-react/public/Maquette-ACCUEIL.png)
 Maquette Shop : ![](front-react/public/Maquette-SHOP.png)
 Home PAGE : ![](front-react/public/home%20page.png)
-Express : ![](front-react/public/express.png)
+MONGO Express : ![](front-react/public/express.png)
