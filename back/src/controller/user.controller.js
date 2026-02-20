@@ -1,23 +1,49 @@
 // src/controller/user.controller.js
+const userService = require("../service/user.service");
 
-const getUserById = (req, res) => {
-    res.json({ message: "getUserById OK", id: req.params.id });
+const getUserById = async (req, res) => {
+    try {
+        const user = await userService.getUserById(req.params.id);
+        res.json(user);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message });
+    }
 };
 
-const getAllUsers = (req, res) => {
-    res.json({ message: "getAllUsers OK" });
+const getAllUsers = async (req, res) => {
+    try {
+        const users = await userService.getAllUsers();
+        res.json(users);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message });
+    }
 };
 
-const createUser = (req, res) => {
-    res.status(201).json({ message: "createUser OK", body: req.body });
+const createUser = async (req, res) => {
+    try {
+        const user = await userService.createUser(req.body);
+        res.status(201).json(user);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message });
+    }
 };
 
-const updateUser = (req, res) => {
-    res.json({ message: "updateUser OK", id: req.params.id, body: req.body });
+const updateUser = async (req, res) => {
+    try {
+        const user = await userService.updateUser(req.params.id, req.body);
+        res.json(user);
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message });
+    }
 };
 
-const deleteUser = (req, res) => {
-    res.json({ message: "deleteUser OK", id: req.params.id });
+const deleteUser = async (req, res) => {
+    try {
+        await userService.deleteUser(req.params.id);
+        res.json({ message: "User deleted successfully", id: req.params.id });
+    } catch (err) {
+        res.status(err.statusCode || 500).json({ error: err.message });
+    }
 };
 
 module.exports = {
