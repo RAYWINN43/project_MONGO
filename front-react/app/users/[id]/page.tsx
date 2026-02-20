@@ -13,9 +13,9 @@ const PageUser = () => {
 
     async function fetchUser() {
         try {
-            /* const response = await UserService.getUserById(params.id) ;
+            const response = await UserService.getUserById(params.id) ;
             setUser(response) ; // En cours d'implémentation */
-            const response = await fetch(`http://localhost:3000/api/user/${params.id}`) ;
+            /* const response = await fetch(`http://localhost:3000/api/user/${params.id}`) ;
             const data = await response.json() ;
             setUser(data) ; //*/
         }

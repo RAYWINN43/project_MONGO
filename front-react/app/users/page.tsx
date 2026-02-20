@@ -4,6 +4,7 @@ const useParams = require('next/navigation').useParams ;
 import { useEffect, useState } from "react";
 
 import User from '../types/user' ;
+import UserService from "../lib/user.service";
 
 const PageUsers = () => {
 
@@ -12,9 +13,8 @@ const PageUsers = () => {
 
     async function fetchAllUsers() {
         try {
-            const response = await fetch(`http://localhost:3000/api/user`) ;
-            const data = await response.json() ;
-            setUsers(data) ;
+            const response = await UserService.getAllUsers() ;
+            setUsers(response) ;
         }
         catch (error) {
             console.error('Erreur lors de la récupération des utilisateurs :', error) ;
