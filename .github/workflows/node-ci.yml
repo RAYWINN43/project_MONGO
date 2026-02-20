@@ -23,58 +23,33 @@ jobs:
             back/package-lock.json
             front-react/package-lock.json
 
+      # BACK
       - name: Install back dependencies
         working-directory: back
-        run: npm ci
-
-      - name: Install front dependencies
-        working-directory: front-react
         run: npm ci
 
       - name: Lint back (if exists)
         working-directory: back
         run: |
-          if npm run | grep -qE '^  lint'; then
-            npm run lint
-          else
-            echo "No lint script, skipping"
-          fi
-
-      - name: Lint front (if exists)
-        working-directory: front-react
-        run: |
-          if npm run | grep -qE '^  lint'; then
-            npm run lint
-          else
-            echo "No lint script, skipping"
-          fi
+          if npm run | grep -qE '^  lint'; then npm run lint; else echo "No lint"; fi
 
       - name: Test back (if exists)
         working-directory: back
         run: |
-          if npm run | grep -qE '^  test'; then
-            npm test
-          else
-            echo "No tests, skipping"
-          fi
+          if npm run | grep -qE '^  test'; then npm test; else echo "No tests"; fi
 
-      - name: Test front (if exists)
+      # FRONT
+      - name: Install front dependencies
         working-directory: front-react
-        run: |
-          if npm run | grep -qE '^  test'; then
-            npm test
-          else
-            echo "No tests, skipping"
-          fi
+        run: npm ci
 
-      - name: Build front (if exists)
+      - name: Lint front
         working-directory: front-react
-        run: |
-          if npm run | grep -qE '^  build'; then
-            npm run build
-          else
-            echo "No build script, skipping"
-          fi
+        run: npm run lint
+
+      - name: Build front
+        working-directory: front-react
+        run: npm run build
 
       - name: CI checkpoint
         run: echo "CI passed — back + front OK"
