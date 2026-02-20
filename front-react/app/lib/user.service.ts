@@ -19,14 +19,27 @@ const api = axios.create({
 
 const UserService = {
 
+    async getAllUsers(): Promise<User[]> {
+        try {
+            const response = await api.get<ResponseApi<User[]>>('/') ;
+            const payload = response.data as any ;
+            const users = payload.data ?? payload ;
+            return users as User[] ;
+        } catch (error) {
+            console.error('Erreur lors de la récupération des utilisateurs :', error) ;
+            throw error ;
+        }
+    },
+
     async getUserById(id: string): Promise<User> {
     try {
         const response = await api.get<ResponseApi<User>>(`/${id}`);
-        const user = response.data.data;
+        const payload = response.data as any;
+        const user = payload.data ?? payload;
         if (!user) {
             throw new Error("Utilisateur non trouvé");
         }
-        return user;
+        return user as User;
         } catch (error) {
             console.error('Erreur lors de la récupération de l\'utilisateur :', error);
             throw error;

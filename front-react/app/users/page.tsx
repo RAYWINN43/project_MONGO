@@ -2,8 +2,11 @@
 
 const useParams = require('next/navigation').useParams ;
 import { useEffect, useState } from "react";
+import styles from "@/app/page.module.css";
+import user_styles from "./page.module.css" ;
 
 import User from '../types/user' ;
+import UserService from "../lib/user.service";
 
 const PageUsers = () => {
 
@@ -12,9 +15,8 @@ const PageUsers = () => {
 
     async function fetchAllUsers() {
         try {
-            const response = await fetch(`http://localhost:3000/api/user`) ;
-            const data = await response.json() ;
-            setUsers(data) ;
+            const response = await UserService.getAllUsers() ;
+            setUsers(response) ;
         }
         catch (error) {
             console.error('Erreur lors de la récupération des utilisateurs :', error) ;
@@ -25,16 +27,29 @@ const PageUsers = () => {
     }, []) ;
 
     return (
-        <div>
+        <main className={styles.page}>
             <h1>Utilisateurs</h1>
-            {users && users.map((user) => (
-                <div key={user._id}>
-                    <p>Nom : {user.name}</p>
-                    <p>Email : {user.email}</p>
-                    <p>Date d'inscription : {user.createdAt}</p>
-                </div>
-            ))}
-        </div>
+            <div>
+                <table className={user_styles.table}>
+                    <thead className={user_styles.tableHeader}>
+                        <tr>
+                            <th scope="col">Nom</th>
+                            <th scope="col">Email</th>
+                            <th scope="col">Date d'inscription</th>
+                        </tr>
+                    </thead>
+                    {users && users.map((user) => (
+                            <tbody key={user._id} className={user_styles.tableText}>
+                                <tr>
+                                    <th scope="col"><a href={`/users/${user._id}`}>{user.name}</a></th>
+                                    <th scope="col"><a href={`/users/${user._id}`}>{user.email}</a></th>
+                                    <th scope="col">{user.createdAt}</th>
+                                </tr>
+                            </tbody>
+                    ))}
+                </table>
+            </div>
+        </main>
     ) ;
 }
 
